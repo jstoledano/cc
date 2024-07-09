@@ -10,6 +10,7 @@ class Distrito(models.Model):
     
     class Meta:
         verbose_name_plural = "Distritos"
+        ordering = ['distrito']
 
 
 class DistritoLocal(models.Model):
@@ -21,6 +22,7 @@ class DistritoLocal(models.Model):
     
     class Meta:
         verbose_name_plural = "Distritos Locales"
+        ordering = ['distrito_local']
 
 
 
@@ -29,10 +31,11 @@ class Municipio(models.Model):
     nombre = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.nombre
+        return f'{self.municipio:03d} - {self.nombre}'
     
     class Meta: 
         verbose_name_plural = "Municipios"
+        ordering = ['municipio']
 
 
 class Seccion(models.Model):
@@ -43,7 +46,8 @@ class Seccion(models.Model):
     activa = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'29-{self.distrito.distrito}-{self.distrito_local.distrito_local}-{self.municipio.municipio}-{self.seccion:04}'
+        return f'29-{self.distrito.distrito:02}-{self.distrito_local.distrito_local:02}-{self.municipio.municipio:03}-{self.seccion:04}'
     
     class Meta:
         verbose_name_plural = "Secciones"
+        ordering = ['distrito', 'distrito_local', 'municipio', 'seccion']

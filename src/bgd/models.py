@@ -25,7 +25,6 @@ class DistritoLocal(models.Model):
         ordering = ['distrito_local']
 
 
-
 class Municipio(models.Model):
     municipio = models.SmallIntegerField()
     nombre = models.CharField(max_length=100)
@@ -36,6 +35,19 @@ class Municipio(models.Model):
     class Meta: 
         verbose_name_plural = "Municipios"
         ordering = ['municipio']
+
+
+class Localidad(models.Model):
+    localidad = models.SmallIntegerField()
+    nombre = models.CharField(max_length=100)
+    municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.municipio.municipio:03d}-{self.localidad:03d} - {self.nombre}'
+    
+    class Meta:
+        verbose_name_plural = "Localidades"
+        ordering = ['municipio', 'localidad']
 
 
 class Seccion(models.Model):

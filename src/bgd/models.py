@@ -5,10 +5,11 @@ from django.db import models
 class Entidad(models.Model):
     """Modelo que representa una entidad federativa."""
     entidad = models.SmallIntegerField()
+    clave = models.CharField(max_length=4)
     nombre = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.entidad:02d} - {self.nombre}'
+        return f'{self.entidad:02d}{self.clave}'
 
     def save(
         self, force_insert=False, force_update=False, using=None, update_fields=None
@@ -70,7 +71,9 @@ class Municipio(models.Model):
     """Modelo que representa un municipio."""
     entidad = models.ForeignKey(Entidad, on_delete=models.CASCADE)
     municipio = models.SmallIntegerField()
-    nombre = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=200)
+    activo = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         """Sobreescribe el método save para asegurar que el nombre del municipio
@@ -117,7 +120,7 @@ class Seccion(models.Model):
     activa = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'29-{self.distrito.distrito:02}-\
+        return f'{self.municipio.entidad.entidad}-{self.distrito.distrito:02}-\
         {self.distrito_local.distrito_local:02}-\
         {self.municipio.municipio:03}-{self.seccion:04}'
 

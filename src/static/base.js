@@ -1,4 +1,4 @@
-// JavaScript necesario para el funcionamiento de la navbar en index.html
+// JavaScript necesario para el funcionamiento de la navbar en base.html
 // y para el funcionamiento de la galería de imágenes en gallery.html
 // Se utiliza el framework Materialize para el diseño de la página
 // y la librería Lightbox para la galería de imágenes
